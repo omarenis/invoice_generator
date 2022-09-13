@@ -1,6 +1,6 @@
 package com.med_ali.invoice_generator;
 
-import com.itextpdf.text.DocumentException;
+import com.lowagie.text.DocumentException;
 import com.med_ali.invoice_generator.models.Client;
 import com.med_ali.invoice_generator.models.Command;
 import com.med_ali.invoice_generator.models.CommandLine;
