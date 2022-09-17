@@ -6,20 +6,36 @@ import java.util.List;
 
 public class Command {
     private Long id;
-    private Client client;
+    private Person sender;
+    private Person receiver;
     private Date date;
     private float subtotal;
     private float tva;
     private float total;
     private List<CommandLine> commandLines;
-    public Command(Long id, Client client, Date date, float subtotal, float tva, float total, List<CommandLine> commandLineList) {
+    public Command(Long id, Person sender, Person receiver, Date date, float subtotal, float tva, float total, List<CommandLine> commandLineList) {
         this.id = id;
-        this.client = client;
+        this.sender = sender;
+        this.receiver = receiver;
         this.date = date;
         this.subtotal = subtotal;
         this.tva = tva;
         this.total = total;
         commandLines = commandLineList;
+    }
+
+    public Command(Long id, Person sender, Person receiver, float tva, List<CommandLine> commandLines)
+    {
+        this.total = 0;
+        this.subtotal = 0;
+        for (CommandLine commandLine :
+                commandLines) {
+            this.total += commandLine.getTotal();
+            this.subtotal += commandLine.getSubtotal();
+        }
+        this.receiver = receiver;
+        this.sender = sender;
+        this.tva = tva;
     }
 
     public Long getId() {
@@ -28,14 +44,6 @@ public class Command {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
     }
 
     public Date getDate() {
@@ -76,5 +84,21 @@ public class Command {
 
     public void setCommandLines(List<CommandLine> commandLines) {
         this.commandLines = commandLines;
+    }
+
+    public Person getSender() {
+        return sender;
+    }
+
+    public void setSender(Person sender) {
+        this.sender = sender;
+    }
+
+    public Person getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(Person receiver) {
+        this.receiver = receiver;
     }
 }

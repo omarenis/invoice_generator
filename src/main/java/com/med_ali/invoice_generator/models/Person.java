@@ -1,12 +1,12 @@
 package com.med_ali.invoice_generator.models;
 
-public class Client {
+public class Person {
     private String firstname;
     private String lastname;
     private String codeTva;
     private String address;
 
-    public Client(String firstname, String lastname, String codeTva, String address) {
+    public Person(String firstname, String lastname, String codeTva, String address) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.codeTva = codeTva;
