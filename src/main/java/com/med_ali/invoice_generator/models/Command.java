@@ -13,6 +13,8 @@ public class Command {
     private float tva;
     private float total;
     private List<CommandLine> commandLines;
+
+    public  Command(){}
     public Command(Long id, Person sender, Person receiver, Date date, float subtotal, float tva, float total, List<CommandLine> commandLineList) {
         this.id = id;
         this.sender = sender;

@@ -75,10 +75,24 @@ public class InvoiceGenerator {
         textCell.setVerticalAlignment(Element.ALIGN_CENTER);
         table.addCell(imageCell);
         table.addCell(paragraph);
-        Chunk senderReceiverData = new Chunk("");
-        Phrase senderData = new Phrase("");
+        Paragraph c = new Paragraph("Destination:\n");
+        Phrase nameReceiver = new Phrase(command.getReceiver().getFirstname() + command.getReceiver().getLastname(), new Font(Font.BOLD));
+        Phrase nameSender = new Phrase(command.getReceiver().getFirstname() + command.getReceiver().getLastname(), new Font(Font.BOLD));
+        Phrase addressAndTvaCodeReceiver = new Phrase(command.getReceiver().getAddress() + "\nNuméro TVA"+command.getReceiver().getCodeTva());
+        Phrase addressAndTvaCodeSender = new Phrase("Numéro de TVA: "+command.getSender().getCodeTva());
+        Paragraph c1 = new Paragraph();
+        c1.add(nameSender);
+        c1.add(addressAndTvaCodeSender);
+        Paragraph p1 = new Paragraph();
+        c.add(nameReceiver);
+        c.add(addressAndTvaCodeReceiver);
+        c.setAlignment(Element.ALIGN_LEFT);
+        p1.add(c);
+        c1.setAlignment(Element.ALIGN_RIGHT);
+        p1.add(c1);
         document.setMargins(0, 0, 0, 0);
         document.add(table);
+        document.add(p1);
     }
 
     public OutputStream generatePdf(Command command) throws IOException, DocumentException {
@@ -101,8 +115,8 @@ public class InvoiceGenerator {
         }
         createHeader(command);
         table.setWidth(100);
-        Paragraph paragraph = new Paragraph("Sous-total (TND):\t\t" + command.getSubtotal() +
-                "\nTVA (TND):    \t\t"+command.getTva());
+        Paragraph paragraph = new Paragraph("Sous-total (TND):\t \t" + command.getSubtotal() +
+                "\nTVA (TND):    \t \t"+command.getTva());
         paragraph.setAlignment(Element.ALIGN_RIGHT);
         System.out.println(document.getPageSize().getWidth());
         document.add(table);
